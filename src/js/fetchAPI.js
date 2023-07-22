@@ -7,6 +7,13 @@ axios.defaults.params = {
 const DEFAULT_PAGE = 1
 let page = DEFAULT_PAGE;
 
+const resetPage = () => {
+  page = DEFAULT_PAGE;
+};
+
+const nextPage = () => {
+  page += 1
+}
 async function fetchImages(imagesName) {
   const response = await axios.get('/', {
     params: {
@@ -20,7 +27,7 @@ async function fetchImages(imagesName) {
   })
   const data = response.data;
 
-  page += 1;
+  nextPage()
   return {
     imagesWay: data.hits,
     isLastPage: page >= data.totalHits,
@@ -28,7 +35,7 @@ async function fetchImages(imagesName) {
   }
 
 }
-export { fetchImages, DEFAULT_PAGE, page }
+export { fetchImages, DEFAULT_PAGE, resetPage, nextPage }
 
 
 

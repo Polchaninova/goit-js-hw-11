@@ -1,4 +1,4 @@
-import { fetchImages, DEFAULT_PAGE, page } from './js/fetchAPI';
+import { fetchImages, DEFAULT_PAGE, resetPage, nextPage } from './js/fetchAPI';
 import Notiflix from 'notiflix';
 
 import SimpleLightbox from "simplelightbox";
@@ -9,9 +9,7 @@ const containerCard = document.querySelector('.gallery');
 const btnLoadMore = document.querySelector('.load-more');
 let imagesName = ''
 
-const resetPage = () => {
-  page = DEFAULT_PAGE;
-};
+
 
 formBoxes.addEventListener('submit', onSubmitForm)
 
@@ -52,7 +50,7 @@ btnLoadMore.addEventListener('click', async (e) => {
   e.preventDefault();
   try {
     const { imagesWay, isLastPage } = await fetchImages(imagesName)
-    page += 1
+    nextPage()
     containerCard.insertAdjacentHTML('beforeend', createMarkup(imagesWay))
 
     const { height: cardHeight } =
