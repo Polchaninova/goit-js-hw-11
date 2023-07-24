@@ -7,6 +7,7 @@ axios.defaults.params = {
 const DEFAULT_PAGE = 1
 let page = DEFAULT_PAGE;
 
+
 const resetPage = () => {
   page = DEFAULT_PAGE;
 };
@@ -30,7 +31,7 @@ async function fetchImages(imagesName) {
   nextPage()
   return {
     imagesWay: data.hits,
-    isLastPage: page >= data.totalHits,
+    isLastPage: page*40 >= data.totalHits,
     totalHits: data.totalHits
   }
 

@@ -38,6 +38,7 @@ async function onSubmitForm(e) {
       btnLoadMore.classList.remove('is-visible')
       Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
     }
+
   }
   catch (error) {
     console.log(error);
@@ -50,19 +51,16 @@ btnLoadMore.addEventListener('click', async (e) => {
   e.preventDefault();
   try {
     const { imagesWay, isLastPage } = await fetchImages(imagesName)
-    nextPage()
     containerCard.insertAdjacentHTML('beforeend', createMarkup(imagesWay))
-
     const { height: cardHeight } =
       document.querySelector(".gallery")
         .firstElementChild.getBoundingClientRect();
     console.log(cardHeight);
-
     window.scrollBy({  // window.scrollBy(X, Y);
       top: cardHeight * 2,
       behavior: "smooth", //behavior отвечает за поведение прокрутки.
     });
-
+    
     if (isLastPage) {
       btnLoadMore.classList.remove('is-visible')
       Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
