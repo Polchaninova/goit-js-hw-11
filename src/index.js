@@ -9,8 +9,6 @@ const containerCard = document.querySelector('.gallery');
 const btnLoadMore = document.querySelector('.load-more');
 let imagesName = ''
 
-
-
 formBoxes.addEventListener('submit', onSubmitForm)
 
 async function onSubmitForm(e) {
@@ -19,6 +17,8 @@ async function onSubmitForm(e) {
 
   resetPage()
   btnLoadMore.classList.remove('is-visible')
+  clearCard()
+
   try {
     const { imagesWay, isLastPage, totalHits } = await fetchImages(imagesName)
     //  if request with data is Empty
@@ -60,7 +60,7 @@ btnLoadMore.addEventListener('click', async (e) => {
       top: cardHeight * 2,
       behavior: "smooth", //behavior отвечает за поведение прокрутки.
     });
-    
+
     if (isLastPage) {
       btnLoadMore.classList.remove('is-visible')
       Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
@@ -108,6 +108,9 @@ function createMarkup(images) {
 const photo__card = new SimpleLightbox('.photo__card a', { captionsData: "alt", captionDelay: 250, captionPosition: 'bottom' });
 
 
+function clearCard() {
+  containerCard.innerHTML = '';
+}
 
 
 
