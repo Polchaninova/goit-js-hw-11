@@ -27,11 +27,11 @@ async function fetchImages(imagesName) {
     }
   })
   const data = response.data;
-
+  const isLastPage = page * 40 >= data.totalHits
   nextPage()
   return {
     imagesWay: data.hits,
-    isLastPage: page*40 >= data.totalHits,
+    isLastPage,//: page * 40 >= data.totalHits,
     totalHits: data.totalHits
   }
 
